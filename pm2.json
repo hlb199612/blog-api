@@ -1,13 +1,13 @@
 {
   "apps": [
     {
-      "name": "decorate-api",
+      "name": "blog-api",
       "script": "bin/www",
       "merge_logs": true,
       "instances": 0,
       "exec_mode": "cluster",
-      "error_file": "/var/log/nodejs/decorate-api/err.log",
-      "out_file": "/var/log/nodejs/decorate-api/out.log",
+      "error_file": "/var/log/nodejs/blog-api/err.log",
+      "out_file": "/var/log/nodejs/blog-api/out.log",
       "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
       "env": {
         "NODE_ENV": "production",
