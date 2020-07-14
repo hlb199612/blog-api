@@ -2,10 +2,10 @@ const config = {                              // 默认的dev配置
   DEBUG: true,                                    // 是否调试模式
   // MySQL数据库连接配置
   MYSQL: {
-    host: 'http://121.196.126.70',
+    host: '121.196.126.70',
     database: 'blog',
     username: 'root',
-    password: 'root'
+    password: 'hlb199612'
   }
 };
 if (process.env.NODE_ENV === 'production') {
