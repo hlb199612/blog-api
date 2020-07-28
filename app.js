@@ -38,7 +38,7 @@ app.all("*",function(req,res,next){
 
 
 app.use('/', verifyMiddleware.verifyToken, indexRouter);
-app.use('/cate', verifyMiddleware.verifyToken, cateRouter);                        // 配置分类管理模块路由path
+app.use('/api/cate', verifyMiddleware.verifyToken, cateRouter);                        // 配置分类管理模块路由path
 // app.use('/article', verifyMiddleware.verifyToken, articleRouter);            // 配置文章管理模块路由path
 // app.use('/info', verifyMiddleware.verifyToken, InfoRouter);                        // 配置博客信息管理模块路由path
 // app.use('/admin', verifyMiddleware.verifyToken, adminRouter);                        // 配置管理员管理模块路由path

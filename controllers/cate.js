@@ -5,7 +5,8 @@ const dateFormat = require('dateformat'); //引入dateform时间格式处理包
 
 // 配置对象
 let exportObj = {
-  list
+  list,
+  add
 };
 
 // 导出对象, 供其他模块调用
@@ -83,4 +84,42 @@ function list(req, res) {
     }]
   };
   Common.autoFn(tasks, res, resObj)      // 执行公共方法中的autoFn方法, 返回数据
+}
+
+// 添加分类方法
+function add (req, res) {
+  // 定义一个返回对象
+  const resObj = Common.clone (Constant.DEFAULT_SUCCESS);
+  let tasks = {                                          // 定义一个async任务
+    // 校验参数方法
+    checkParams: (cb) => {
+      // 调用公共方法中的校验参数方法, 如果成功则继续后面操作
+      // 如果失败则传递错误信息到async的最终方法中
+      Common.checkParams (req.body, ['name'], cb);
+    },
+    // 添加方法, 依赖校验参数方法
+    add: ['checkParams', (results, cb)=>{
+      // 使用cate的model中的方法插入到数据库中
+      CateModel
+        .create ({
+          name: req.body.name,
+          imgSrc: req.body.img_src,
+          describe: req.body.describe,
+          tag: req.body.tag,
+          borderColor: req.body.border_color,
+          linkUrl: req.body.link_url,
+          createdAt: dateFormat( new Date(), 'yyyy-mm-dd HH:MM:ss')
+        })
+        .then (function (result) {
+          // 插入结果处理
+          cb (null);                                    // 继续后续操作
+        })
+        .catch (function (err) {
+          // 错误处理
+          console.log (err);                        // 打印错误日志
+          cb (Constant.DEFAULT_ERROR);      // 传递错误信息到async的最终方法中
+        });
+    }]
+  };
+  Common.autoFn (tasks, res, resObj)      // 执行公共方法中的autoFn方法, 返回数据
 }
